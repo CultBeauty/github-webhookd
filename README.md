@@ -10,7 +10,7 @@ github-webhookd start --config=PATH_TO_CONFIG_FILE
 ## Building
 Ensure you have your
 [workspace directory](https://golang.org/doc/code.html#Workspaces) created.
-Change directory to $GOPATH/github.com/gen64/github-webhookd and run
+Change directory to $GOPATH/github.com/nicholasgasior/github-webhookd and run
 the following commands:
 
 ```

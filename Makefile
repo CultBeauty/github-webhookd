@@ -1,12 +1,12 @@
 VERSION?=$$(cat version.go | grep VERSION | cut -d"=" -f2 | sed 's/"//g' | sed 's/ //g')
 GOFMT_FILES?=$$(find . -name '*.go')
 PROJECT_BIN?=github-webhookd
-PROJECT_SRC?=github.com/gen64/github-webhookd
+PROJECT_SRC?=github.com/nicholasgasior/github-webhookd
 
 default: build
 
 tools:
-	GO111MODULE=off go get -u github.com/gen64/go-cli
+	GO111MODULE=off go get -u github.com/nicholasgasior/go-cli
 	GO111MODULE=off go get -u github.com/gorilla/mux
 
 guard-%:
