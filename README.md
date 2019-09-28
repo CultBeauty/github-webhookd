@@ -5,8 +5,8 @@ If you have your projects' repositories in GitHub, your builds done by Jenkins
 and you'd like code changes to trigger jobs then this tool is for it.
 github-webhookd runs as a daemon in the background and exposes API to receive
 GitHub Webhooks. You can add a webhook in the Settings section of your GitHub
-repository. See [Setup Webhook in GitHub](#setup-webhook) section for more
-information.
+repository. See [Setup Webhook in GitHub](#setup-webhook-in-github) section
+for more information.
 
 Before running daemon, you have to prepare a configuration file and set things
 such as: port to listen on, GitHub secret key and Jenkins jobs that are meant
