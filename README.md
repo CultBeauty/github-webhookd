@@ -1,25 +1,17 @@
 # github-webhookd
-Tiny API that triggers Jenkins builds from GitHub Webhook
+Tiny daemon that runs API for GitHub Webhooks and triggers Jenkins jobs.
 
-## CLI
-The following CLI commands are available:
-```
-github-webhookd start --config=PATH_TO_CONFIG_FILE
-```
+If you have your projects' repositories in GitHub, your builds done by Jenkins
+and you'd like code changes to trigger jobs then this tool does it.
+github-webhookd runs as a daemon in the background and exposes API to receive
+GitHub Webhooks. You can add a webhook in the Settings section of your GitHub
+repository. See [#setup-webhook] section for more information.
 
-## Building
-Ensure you have your
-[workspace directory](https://golang.org/doc/code.html#Workspaces) created.
-Change directory to $GOPATH/github.com/nicholasgasior/github-webhookd and run
-the following commands:
-
-```
-make tools
-make
-```
-
-Binary files will be build in `$GOPATH/bin/linux` and `$GOPATH/bin/darwin`
-directories.
+Before running daemon, you have to prepare a configuration file and set things
+such as: port to listen on, GitHub secret key and Jenkins jobs that are meant
+to be triggered. Optionally, you can forward payload received from GitHub
+Webhook to another endpoint (after all jobs are successfully triggered). See
+[#configuration](Configuration) section for more information.
 
 ## Configuration
 Look at `config-sample.json` to see how the configuration file look like. It has
@@ -102,12 +94,51 @@ level as `triggers`):
 ],
 ```
 
-## Running
-Execute the binary, eg.
+## Start
+Download latest release and use below command to start github-webhookd:
+```
+github-webhookd start --config=PATH_TO_CONFIG_FILE
+```
+
+Replace `PATH_TO_CONFIG_FILE` with path to your configuration file.
+
+### Start Docker container
+You can start `github-webhookd` in a Docker container as well. First, build
+the container:
+```
+docker build --no-cache --rm -t github-webhookd:0.7.0 .
+```
+(replace `.` with different path if not running from this repository root dir).
+
+Once image is built, container can be started with:
+```
+docker run --rm --name github-webhookd -v /my/config:/opt/config github-webhookd:0.7.0 start --config=/my/config/config.json
+```
+In above command, replace paths to your configuration file.
+
+## Setup Webhook in GitHub
+Go to your repository *Settings* and choose *Webhooks* from the left menu.
+Press *Add webhook* button and a page with a form should open. Insert URL to
+github-webhookd in _Payload URL_ input and change _Content type_ to 
+_application/json_. The _Secret_ field should be the same as `secret` in
+github-webhookd's configuration file.
+You can select which events you'd like to receive.
+
+More on configuring Webhooks can be found in [official documentation](https://developer.github.com/webhooks/).
+
+## Building
+Ensure you have your
+[workspace directory](https://golang.org/doc/code.html#Workspaces) created.
+Change directory to $GOPATH/github.com/nicholasgasior/github-webhookd and run
+the following commands:
 
 ```
-./github-webhookd start --config=PATH_TO_CONFIG_FILE
+make tools
+make
 ```
+
+Binary files will be build in `$GOPATH/bin/linux` and `$GOPATH/bin/darwin`
+directories.
 
 ## Development
 Follow the steps mentioned in `Building` section. Additionally, there are
