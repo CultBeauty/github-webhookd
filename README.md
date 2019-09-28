@@ -116,7 +116,7 @@ Once image is built, container can be started with:
 ```
 docker run --rm --name github-webhookd -v /my/config:/opt/config github-webhookd:0.7.0 start --config=/my/config/config.json
 ```
-In above command, replace paths to your configuration file.
+In the above command, replace paths to your configuration file.
 
 ## Setup Webhook in GitHub
 Go to your repository *Settings* and choose *Webhooks* from the left menu.
@@ -124,9 +124,9 @@ Press *Add webhook* button and a page with a form should open. Insert URL to
 github-webhookd in _Payload URL_ input and change _Content type_ to 
 _application/json_. The _Secret_ field should be the same as `secret` in
 github-webhookd's configuration file.
-You can select which events you'd like to receive.
 
-More on configuring Webhooks can be found in [official documentation](https://developer.github.com/webhooks/).
+More on configuring Webhooks can be found in the
+[official documentation](https://developer.github.com/webhooks/).
 
 ## Building
 Ensure you have your
