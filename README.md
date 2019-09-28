@@ -109,7 +109,8 @@ the container:
 ```
 docker build --no-cache --rm -t github-webhookd:0.7.0 .
 ```
-(replace `.` with different path if not running from this repository root dir).
+(replace `.` with different path if not running from this repository's root
+directory).
 
 Once image is built, container can be started with:
 ```
